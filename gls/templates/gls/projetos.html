@@ -1,0 +1,23 @@
+{% extends 'gls/base.html' %}
+
+{% block content %}
+
+{% for projeto in projetos %}
+    <div class="alert alert-success">
+        <strong>Projeto: </strong> {{projeto}}
+    </div>
+{% endfor %}
+
+{% for  milestone in milestones %}
+    <div class="alert alert-danger">
+        <strong>milestones: </strong> {{milestone}}
+    </div>
+{% endfor %}
+
+{% for issue in issues %}
+    <div class="alert alert-primary">
+        <strong>Issue: </strong> Descrição: {{issue}}
+    </div>
+{% endfor %}
+
+{% endblock %}

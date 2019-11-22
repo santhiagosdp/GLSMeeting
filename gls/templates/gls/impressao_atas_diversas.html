@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <title>GLSMeeting </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<style type="text/css">
+    .row {
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+        margin-right: -15px;
+        margin-left: -15px;
+    }
+
+    .titulo {
+        text-align: center;
+        color: red;
+    }
+
+    .topico {
+        font-weight: bold;
+        font-size: 16px;
+        line-height: 1.5;
+    }
+
+    .item {
+        font-size: 15px;
+    }
+    .just{
+    font-size: 15px;
+    white-space: pre;
+    text-align: justify;
+    }
+
+</style>
+<body>
+
+{% for ata in atas %}
+<div class="row">
+    <div class="col-5">
+        <img align="right" src="https://conecta.ulbra-to.br/assets/img/fabrica-logo.png">
+        <p align="right">impresso em {{ dataimpressao }} - Pág. {{ata.pag}}/{{ata.paginastotal}}</p>
+    </div>
+</div>
+
+<hr/>
+<div class="row">
+    <h1 class="titulo" style="font-size: 30px">{{ ata.tipo }}</h1>
+</div>
+
+<div class="row">
+    <label class="topico" for="inicio">Inicio: </label>
+    <label class="item" id="inicio">{{ ata.dataInicio }}</label>
+</div>
+
+<br>
+
+<div class="row">
+    <label class="topico" for="presentes">Presentes: </label>
+    <label class="item" id="presentes">{{ ata.presentes }}</label>
+</div>
+
+<br>
+
+<div class="row">
+    <label class="topico" for="projeto">Projeto: </label>
+    <label class="item" id="projeto">{{ ata.projeto }}</label>
+</div>
+
+<br>
+
+<div class="row">
+        <label class="topico">Descrição da Reunião: </label><br><br>
+        {% for assunto in ata.assuntos2 %}
+        <label class="just">{{ assunto }}</label><br>
+        {% endfor %}
+</div>
+
+<hr/>
+
+<label class="topico" for="fim">Encerramento: </label>
+<label class="item" id="fim">{{ ata.dataFim }}</label>
+
+<div style="page-break-after: always"></div>
+{% endfor %}
+</body>
+</html>

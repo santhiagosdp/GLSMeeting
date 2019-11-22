@@ -1,0 +1,39 @@
+{% extends 'gls/base.html' %}
+
+{% block content %}
+<br>
+<br>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-5">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Workspaces Desabilitados</h4>
+                <!-- Clique em <a
+                            style="width: 30px;
+                            height: 30px;
+                            padding: 6px 0px;
+                            border-radius: 15px;
+                            text-align: center;
+                            font-size: 12px;
+                            line-height: 1.42857;"
+                        class="btn btn-info"><i class="fa fa-check"></i></a> para excluir e ff para habilitar -->
+
+                <label>clique em <i class="fa fa-plus" style="font-size:20px;color:rgb(59, 27, 240)"></i> para habilitar
+                    ou em <i class="fa fa-remove" style="font-size:20px;color:red"></i> para deletar </label>
+                <hr>
+                {% for space in ws_desab %}
+                <div style="font-weight:bold;"> {{space.nome}} -
+                    <a href="/habilitar_ws/{{space.id}}">
+                        <i class="fa fa-plus" style="font-size:20px;color:rgb(59, 27, 240)"></i>
+                    </a> - 
+                    <a href="/desabilitar_ws/{{space.id}}?excluir=sim">
+                        <i class="fa fa-remove" style="font-size:20px;color:red"></i>
+                    </a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <title>GLSMeeting</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}">
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        </br>
+        <div class="fadeIn first">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c6/GitLab_logo.png" id="icon" alt="User Icon" />
+        </div>
+        <br>
+        <!-- Login Form -->
+        <form action="submit" , method="POST">{% csrf_token %}
+            <input id="oauth-login" type="submit" class="fadeIn fourth" value="Acessar com Gitlab">
+            <div class="form-group">
+                {% for message in messages %}
+                <div class="alert alert-danger">
+                    <strong>Error! </strong> {{message}}
+                </div>
+                {% endfor %}
+            </div>
+        </form>
+
+        <div id="formFooter">
+            <a class="underlineHover" href="#">Ajuda</a>
+        </div>
+
+    </div>
+</div>
+</body>
+
+</html>

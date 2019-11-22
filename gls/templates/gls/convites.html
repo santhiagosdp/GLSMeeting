@@ -1,0 +1,27 @@
+{% extends 'gls/base.html' %}
+
+
+{% block content %}
+<br>
+<br>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-5">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Convites Pendentes</h4>
+                {% for ws in workspaces_pendentes %}
+                <div style="font-weight:bold;"> {{ws.nome}} - 
+                        <a href="/resposta_convite/{{ws.id}}/?resp=aceitar">
+                            <i style="font-size:25px;color:rgb(59, 27, 240)"> + </i>
+                        </a>
+                        <a href="/resposta_convite/{{ws.id}}/?resp=recusar">
+                            <i style="font-size:25px;color:rgb(240, 27, 45)"><h7> - </h7></i>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

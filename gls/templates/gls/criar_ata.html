@@ -1,0 +1,33 @@
+{% extends 'gls/base.html' %}
+
+{% block content %}
+<br>
+<div class="row">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-8">
+        <!-- <h2>Cadastrar Reunião</h2> -->
+        <hr />
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-2">
+    </div>
+    <div class="col-sm-8">
+        <ul class="navbar navbar-expand-sm bg-dark navbar-dark">
+            <form action="/new/{{id}}/diaria">
+                <button class="btn btn-info" style="width: 80px;">Cadastrar Reunião Diária</button>                
+            </form>
+            <hr />
+            <form action="/new/{{id}}/diaria">
+                <button class="btn btn-info" href="/new/{{id}}/revisao" style="width: 80px;">Revisão</button>
+            </form>
+            <hr />
+            <form action="/new/{{id}}/diaria">
+                <button class="btn btn-info" href="/new/{{id}}/final" style="width: 80px;">Final</button>
+            </form>
+        </ul>
+    </div>
+</div>
+{% endblock %}

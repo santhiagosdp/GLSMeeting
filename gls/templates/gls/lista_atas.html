@@ -1,0 +1,131 @@
+{% extends 'gls/base.html' %}
+
+
+{% block content %}
+
+
+<br>
+<div class="row">
+    <div class="col-sm-6">
+        <h3>
+            <form action="/desabilitar_ws/{{id}}?excluir=nao" method="POST">{% csrf_token %}
+                <button type="submit" class="btn btn-light">Desabilitar</button>
+                {{ws.nome}}
+            </form>
+        </h3>
+        <hr />
+    </div>
+    <div class="col-sm-4" align="center">
+        <div class="btn-group">
+            <button type="button" class="btn btn-primary">Nova Cerimônia</button>
+            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="/new/{{id}}/planejamento">Planejamento</a>
+                <a class="dropdown-item" href="/selecao/projeto/{{id}}/">Diária</a>
+                <a class="dropdown-item" href="/new/{{id}}/final">Final</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-9">
+        <table id="tabela" class="forum-list table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Inicio</th>
+                    <!-- <th scope="col">Fim</th> -->
+                    <th scope="col">Tipo</th>
+                    <th scope="col">Projeto</th>
+                    <!-- <th scope="col">Presentes</th> -->
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Segunda linha para pesquisar por dia -->
+                <form target="_blank" action="/data/print" method="POST">{% csrf_token %}
+                    <tr>
+
+                        <th>
+                            <input class="form-control" type="text" placeholder="dd/mm/aaaa" id="txtColuna1"
+                                name="txtColuna1">
+                        </th>
+                        <th>
+                            <!-- <a target="_blank" href="/print/?data=">Imprimir Workspace</a> -->
+                            <button type="submit" class="btn btn-light">Imprimir Workspace</button>
+                        </th>
+
+                    </tr>
+                </form>
+                {% for ata in atas %}
+                <tr>
+                    <td>{{ata.dataInicio}}</td>
+                    <!-- <td>{{ata.dataFim}}</td> -->
+                    <td>{{ata.tipo}}</td>
+                    <td>{{ata.projeto}}</td>
+                    <!-- <td>{{ata.presentes}}</td> -->
+                    <td>
+                        <a target="_blank" href="/print/{{ata.id}}">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/PDF_file_icon.svg/833px-PDF_file_icon.svg.png"
+                        width="25"></a>
+                        <a href="/delete_ata/{{ws.id}}/{{ata.id}}"><i class="fa fa-remove"
+                                style="font-size:28px;color:red"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    <div class="col-md-3" align="center">
+
+        <h4>Integrantes</h4>
+        {% for integrante in team %}
+        <!-- For pegando integrantes de organizações-->
+        <div class="row">
+            <div align="left" class="col-sm-9">
+                {{integrante.first_name}} 
+            </div>
+            <div class="col-sm-1">
+                    <a href="/delete_integrante/{{id}}/{{integrante.email}}">
+                        <i class="fa fa-remove" style="font-size:18px;color:red"></i>
+                    </a>
+            </div>
+            <div class="col-sm-1"></div>
+
+        </div>
+        {% endfor %}
+        <br>
+        <div>
+            <form action="/ws/{{id}}/new_integrante">
+                <!--/ws/{{id}}/new_integrante">-->
+                <button type="submit" class="btn btn-dark" style="width: 50%">+Integrante</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- SCRIPT PARA FILTRAR TABELA POR DATA -->
+<script type="text/javascript">
+    $(function () {
+        $("#tabela input").keyup(function () {
+            var index = $(this).parent().index();
+            var nth = "#tabela td:nth-child(" + (index + 1).toString() + ")";
+            var valor = $(this).val().toUpperCase();
+            $("#tabela tbody tr").show();
+            $(nth).each(function () {
+                if ($(this).text().toUpperCase().indexOf(valor) < 0) {
+                    $(this).parent().hide();
+                }
+            });
+        });
+
+        // $("#tabela input").blur(function () {
+        //     $(this).val("");
+        // });
+    });
+</script>
+{% endblock %}

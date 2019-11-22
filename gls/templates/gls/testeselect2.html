@@ -1,0 +1,58 @@
+<html lang="en">
+
+<head>
+    <title>Jquery select2 ajax autocomplete example code with demo</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+</head>
+
+<body>
+    <h4>Programmatic Control</h4>
+    <select style="width: 500px " class="progControlSelect2" id="progControlSelect2" name="progControlSelect2"
+        multiple="true">
+        <!-- {% for w in ws%}
+        <option value=>{{w.nome}}</option>
+        {% endfor %} -->
+    </select>
+    <form>
+        <input type="button" class="iOSSelect2" value="Set iOS Technologies">
+    </form>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var test = $('#progControlSelect2');
+
+            $(test).select2({
+                data: [
+                    { id: 0, text: "enhancement" },
+                    { id: 1, text: "bug" },
+                    { id: 2, text: "duplicate" },
+                    { id: 3, text: "invalid" },
+                    { id: 4, text: "wontfix" }
+                ],
+                width: "300px"
+            });
+
+            $(test).select2({
+                placeholder: "What technologies do you use most of time"//placeholder
+            });
+
+            $(test).select2({
+                tags: true
+            });
+
+            // botão 
+            $(".iOSSelect2").on("click", function () {
+                var theID = $(test).select2('data').id;
+                // var theSelection = $(test).select2('data').text;
+                var theSelection = $(test).val('$data').trigger('change');
+                alert(theSelection)
+            });
+        })
+    </script>
+
+
+</body>
+
+</html>

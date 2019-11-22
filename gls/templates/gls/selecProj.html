@@ -1,0 +1,32 @@
+{% extends 'gls/base.html' %}
+
+
+{% block content %}
+<br>
+<br>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-7">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Selecionar Projeto para iniciar a Reunião Diária</h4>
+                <hr>
+                <label for="nome">Grupo: {{ws.nome}}</label><br>
+                <form action="/new/{{id}}/diaria" , method="POST"> {% csrf_token %}
+                    <label for="projeto">Projeto:</label>
+                    <select data-live-search="true" class="form-control" id="projeto_selecionado" name="projeto_selecionado"
+                        style="width: 400px;">
+                        {% for project in projects %}
+                        <option value="{{ project.id }}">{{ project.id }} {{ project.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <br>
+                    <div class="form-group" align="center">
+                        <button type="submit" class="btn btn-success" style="width: 50%">Iniciar Reunião Diária</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

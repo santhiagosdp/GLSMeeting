@@ -1,0 +1,29 @@
+{% extends 'gls/base.html' %}
+
+
+{% block content %}
+<br>
+<br>
+<div class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-5">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Adicionar Integrante</h4>
+                <form action="/ws/{{id}}/new_integrante/submit" , method="POST"> {% csrf_token %}
+                    <!-- adicionando integrante-->
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="text" class="form-control" id="email" name="email" 
+                        >
+                    </div>
+                    <br>
+                    <div class="form-group" align="center">
+                        <button type="submit" class="btn btn-dark" style="width: 50%">Adicionar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

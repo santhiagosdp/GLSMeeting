@@ -1,0 +1,77 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/gls.css' %}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+</head>
+
+<body>
+    <!-- primeira linha com menu preto -->
+    <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/ws">INICIO</a>
+        <ul class="navbar-nav px-3">
+            {% for conv in convite %}
+            <form align="center" action="/convite">{% csrf_token %}
+                <button type="submit" style="font-size:15px;" class="btn-convite">Convite(s)
+                    Pendente(s)</button>
+            </form>
+            {% endfor %}
+        </ul>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+                <a style="color: white" class="nav-link" href="/logout/"><i
+                        class="fa fa-user-circle fa-fw"></i>{{ user }}
+                    (Sair)</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- fim  -->
+
+    <!-- barra lateral repsonsivo -->
+    <div class="sidebar">
+        <a title="Alterar Perfil" align="center" href="/perfil"><img class="avatar" src={{ token.avatar }}></a>
+
+        <h4 class="active-title">Workspaces</h4>
+
+        {% for space in workspaces %}
+        <a href="/ws/{{ space.id }}">{{ space.nome }}</a>
+        {% endfor %}
+        <br>
+        <form align="center" action="/ws/new" , method="POST">{% csrf_token %}
+            <button type="submit" style="font-size:20px;" class="btn btn-dark">+Workspace</button>
+        </form>
+        <hr />
+        <form align="center" action="/ws/desabilitados">{% csrf_token %}
+            <button type="submit" style="font-size:15px;" class="btn btn-light">Desabilitados</button>
+        </form>
+        <br>
+        </hr>
+
+    </div>
+    <!-- fim sidebar -->
+
+    <!-- PÁGINAS BLOCO -->
+    <div class="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- FIM PÁGINAS -->
+
+    <!-- FOOTER -->
+    <div class="footer">
+        <a href="#">Desenvolvido por Santhiagosdp</a>
+    </div>
+    <!-- FIM FOOTER -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+
+</html>
