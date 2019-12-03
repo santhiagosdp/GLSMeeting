@@ -18,10 +18,14 @@ from django.views.decorators.csrf import csrf_protect
 import requests
 from django.contrib import messages
 # gerar pdf
+import os
 from io import BytesIO
 from django.http import HttpResponse
 from django.template.loader import get_template
 from xhtml2pdf import pisa
+from django.template import Context
+import urllib3
+import reportlab
 # importando models.py
 from .models import cerimonia, Workspace, Colaborador, User, Token
 

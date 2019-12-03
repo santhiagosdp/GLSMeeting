@@ -5,7 +5,7 @@ from django.views.generic import RedirectView
 from . import views
 
 urlpatterns = [
-    path('', RedirectView.as_view(url="/login") ),
+    path('', RedirectView.as_view(url="/ws") ),
 
     #LOGIN e LOGOUT
     path('login/', views.login_user),
